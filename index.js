@@ -1,11 +1,19 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
+import React, { useEffect } from "react";
+import "./style.css";
+import { v4 as uuidv4 } from "uuid";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+export default function RecipeTile({ recipe }) {
+  return (
+    recipe["recipe"]["image"].match(/\.(jpeg|jpg|gif|png)$/) != null && (
+      <div
+        className="recipeTile"
+        onClick={() => window.open(recipe["recipe"]["url"])}
+      >
+        <img className="recipeTile__img" src={recipe["recipe"]["image"]} />
+        <p className="recipeTile__name" key={uuidv4()}>
+          {recipe["recipe"]["label"]}
+        </p>
+      </div>
+    )
+  );
+}
